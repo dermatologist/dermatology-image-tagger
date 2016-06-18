@@ -47,6 +47,13 @@ Dermatology Image Tagger
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
+        'pyqt',
+        'matplotlib',
+        'opencv',
+        'pyopengl',
+        'visvis',
+        'pyforms',
+        'esky',
         # add your dependencies here
         # remember to use 'package-name>=x.y.z,<x.y+1.0' notation (this way you get bugfixes)
     ],
