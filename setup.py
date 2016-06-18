@@ -54,6 +54,9 @@ Dermatology Image Tagger
         'visvis',
         'pyforms',
         'esky',
+        'pil',
+        'piexif',
+
         # add your dependencies here
         # remember to use 'package-name>=x.y.z,<x.y+1.0' notation (this way you get bugfixes)
     ],

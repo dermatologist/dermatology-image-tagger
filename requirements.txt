@@ -19,6 +19,9 @@ pyopengl
 visvis
 pyforms
 esky
+piexif
+pil
+
 #nose-cov
 #beautifulsoup4
 #

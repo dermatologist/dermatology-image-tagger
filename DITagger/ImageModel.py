@@ -1,12 +1,25 @@
+from PIL import Image
+import piexif
+
+import json
+
 class ImageModel(object):
     """
     Image Model for the DITagger.
     The Class will write to the image file
+    Ref: stackoverflow 8586940 writing-complex-custom-metadata-on-images-through-python
     """
 
     def __init__(self, ditpath, ditfile):
         self._ditpath = ditpath
         self._ditfile = ditfile
+        self._usercomment = {
+            'ditid': '',
+            'lesion': '',
+            'diagnosis': '',
+            'location': '',
+            'ditcomment': ''
+        }
 
     @property
     def ditpath(self):
