@@ -1,0 +1,22 @@
+# This file is part of DITagger.
+# https://github.com/dermatologist/dermatology-image-tagger
+
+# Licensed under the GPL license:
+# http://www.opensource.org/licenses/GPL-license
+# Copyright (c) 2016, Bell Eapen <github@gulfdoctor.net>
+
+[run]
+omit =
+    *tests.py
+branch = True
+source =
+    DITagger
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    from urllib.parse import parse_qs
+    except ImportError:
