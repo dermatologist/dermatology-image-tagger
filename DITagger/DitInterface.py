@@ -11,6 +11,7 @@ __status__ = "Development"
 import pyforms
 from   pyforms import BaseWidget
 from   pyforms.Controls import ControlText
+from   pyforms.Controls import ControlImage
 from   pyforms.Controls import ControlButton
 
 
@@ -19,24 +20,30 @@ class DitInterface(BaseWidget):
         super(DitInterface, self).__init__('Dermatology Image Tagger by Bell R Eapen')
 
         # Definition of the forms fields
-        self._firstname = ControlText('First name', 'Default value')
-        self._middlename = ControlText('Middle name')
-        self._lastname = ControlText('Lastname name')
-        self._fullname = ControlText('Full name')
-        self._button = ControlButton('Press this button')
+        self._ditimage = ControlImage()
+        self._ditid = ControlText('Patient ID')
+        self._lesion = ControlText('Lesion')
+        self._diagnosis = ControlText('Diagnosis')
+        self._location = ControlText('Location')
+        self._ditcomment = ControlText('Comments')
+        self._buttonImage = ControlButton('Save Image')
 
+        """
         self._formset = [{
-            'Tab1': ['_firstname', '||', '_middlename', '||', '_lastname'],
-            'Tab2': ['_fullname']
+            'Image': ['_ditimage', '||', '_ditid', '||', '_lesion', '_diagnosis', '||', '_location', '||', '_ditcomment', '||', '_buttonImage'],
+            'Search': ['_fullname'],
+            'Settings': ['_fullname'],
+            'Help/Avout': ['_fullname']
         },
-            '=', (' ', '_button', ' ')]
+            '=', (' ', '_buttonExit', ' ')]
 
-        self._fullname.addPopupSubMenuOption('Path',
+        self._ditid.addPopupSubMenuOption('Path',
                                              {
                                                  'Delete': self.__dummyEvent,
                                                  'Edit': self.__dummyEvent,
                                                  'Interpolate': self.__dummyEvent
                                              })
+        """
 
         # Define the window main menu using the property main menu
         self.mainmenu = [
@@ -44,12 +51,33 @@ class DitInterface(BaseWidget):
                 {'Open': self.__dummyEvent},
                 '-',
                 {'Save': self.__dummyEvent},
-                {'Save as': self.__dummyEvent}
+                {'Restore': self.__dummyEvent},
+                {'Import': self.__dummyEvent},
+                '-',
+                {'Exit': self.__dummyEvent}
+
             ]
             },
             {'Edit': [
-                {'Copy': self.__dummyEvent},
-                {'Past': self.__dummyEvent}
+                {'Paint': self.__dummyEvent},
+                {'Rectangle': self.__dummyEvent}
+            ]
+            },
+            {'Search': [
+                {'Find': self.__dummyEvent},
+                {'Find in Folder': self.__dummyEvent}
+            ]
+            },
+            {'Settings': [
+                {'Default Path': self.__dummyEvent},
+                {'Encryption': self.__dummyEvent},
+                {'Back Up': self.__dummyEvent}
+
+            ]
+            },
+            {'Help/About': [
+                {'Help/About': self.__dummyEvent},
+                {'Check for Updates': self.__dummyEvent}
             ]
             }
         ]
