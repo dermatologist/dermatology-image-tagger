@@ -1,5 +1,5 @@
 #
-####### example-requirements.txt #######
+####### requirements.txt #######
 #
 ###### Requirements without Version Specifiers ######
 nose

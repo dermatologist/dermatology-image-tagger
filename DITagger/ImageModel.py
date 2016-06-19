@@ -14,13 +14,14 @@ class ImageModel(object):
     def __init__(self, ditpath, ditfile):
         self._ditpath = ditpath
         self._ditfile = ditfile
-
+        self._fullpath = ditpath + ditfile
+        # TODO: Create backup if ImageDescription is not DITagger
         # Add exif in a file
-        self._img = pexif.JpegFile.fromFile(ditpath + ditfile)
+        self._img = pexif.JpegFile.fromFile(self._fullpath)
         # Image Description Tag
         self._img.exif.primary.ImageDescription = "DITagger"
 
-        exif_dict = piexif.load(self._ditpath + self._ditfile)
+        exif_dict = piexif.load(self._fullpath)
 
         # 37510 is the tag id of UserComment
         try:
@@ -50,6 +51,14 @@ class ImageModel(object):
     @ditfile.setter
     def ditfile(self, ditfile):
         self._ditfile = ditfile
+
+    @property
+    def fullpath(self):
+        return self._fullpath
+
+    @fullpath.setter
+    def fullpath(self, fullpath):
+        self._fullpath = fullpath
 
     @property
     def ditid(self):
@@ -100,7 +109,7 @@ class ImageModel(object):
         # Save image using pexif
         # Ref: https://github.com/bennoleslie/pexif
         self._img.exif.primary.ExtendedEXIF.UserComment = json.dumps(self._usercomment)
-        self._img.writeFile(self._ditpath + self._ditfile)
+        self._img.writeFile(self._fullpath)
 
     def hasIt(self, needle):
         if needle in json.dumps(self._usercomment):
