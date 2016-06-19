@@ -67,6 +67,7 @@ class ImageModel(object):
     @lesion.setter
     def lesion(self, lesion):
         self._usercomment['lesion'] = lesion
+        self._ditsave()
 
     @property
     def diagnosis(self):
@@ -75,6 +76,7 @@ class ImageModel(object):
     @diagnosis.setter
     def diagnosis(self, diagnosis):
         self._usercomment['diagnosis'] = diagnosis
+        self._ditsave()
 
     @property
     def location(self):
@@ -83,6 +85,7 @@ class ImageModel(object):
     @location.setter
     def location(self, location):
         self._usercomment['location'] = location
+        self._ditsave()
 
     @property
     def ditcomment(self):
@@ -91,6 +94,7 @@ class ImageModel(object):
     @ditcomment.setter
     def ditcomment(self, ditcomment):
         self._usercomment['ditcomment'] = ditcomment
+        self._ditsave()
 
     def _ditsave(self):
         # Save image using pexif

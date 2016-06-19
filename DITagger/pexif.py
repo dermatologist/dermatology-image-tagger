@@ -21,6 +21,7 @@ THE SOFTWARE.
 
     Status API Training Shop Blog About
 
+https://github.com/bennoleslie/pexif
 
 pexif is a module which allows you to view and modify meta-data in
 JPEG/JFIF/EXIF files.
