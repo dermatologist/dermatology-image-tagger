@@ -3,25 +3,31 @@
    :alt: License: AGPL-3
 
 ==============
-{module_title}
+dermatology-image-tagger
 ==============
 
-This module extends the functionality of ... to support ...
-and allow you to ...
+This is the python implementation of the popular Dermatology Image Tagger.
+The original implementation was in Java and it has been voted as one of the top 50 most useful
+software in dermatology. (No: 21)
+`The Top 50 Tech Tools and Software Platforms for Dermatologists <http://blog.directcapital.com/business-insights/top-technology-tools-for-dermatologists/>`
+
+.. image:: http://dermatologist.co.in/wp-content/uploads/2015/05/rsz_dit.jpg
+:target: http://dermatologist.co.in/2015/05/dermatology-image-tagger.html
+   :alt: Dermatology Image Tagger
 
 Installation
 ============
 
 To install this module, you need to:
 
-#. Do this ...
+#. This is work in progress. Please DO NOT install in production.
 
 Configuration
 =============
 
 To configure this module, you need to:
 
-#. Go to ...
+#. Work in progress
 
 Usage
 =====
@@ -30,12 +36,7 @@ To use this module, you need to:
 
 #. Go to ...
 
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
 
-.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
-.. branch is "8.0" for example
 
 Known issues / Roadmap
 ======================
@@ -46,35 +47,37 @@ Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
+<https://github.com/dermatologist/dermatology-image-tagger/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smashing it by providing a detailed and welcomed feedback.
 
 Credits
 =======
 
+* `pexif (Ben Leslie) <https://github.com/bennoleslie/pexif>`
+
 Images
 ------
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
 
 Contributors
 ------------
 
-* Firstname Lastname <email.address@example.org>
-* Second Person <second.person@example.org>
+* Bell Eapen <github@gulfdoctor.net>
+* You :)
 
 Maintainer
 ----------
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
+.. image:: http://dermatologist.co.in/wp-content/uploads/2016/06/rsz_dermatologists1.jpg
+:alt: Dermatologists Sans Borders
+   :target: http://dermatologist.co.in
 
-This module is maintained by the OCA.
+This module is maintained by the Dermatologists Sans Borders.
 
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
+DermSB, or the Dermatologists Sans Borders, is the largest online group
+of skin care professionals whose
+mission is to support the collaborative development of dermatology tools and reviews and to
 promote its widespread use.
 
-To contribute to this module, please visit https://odoo-community.org.
+To contribute to this module, please visit http://dermatologist.co.in
