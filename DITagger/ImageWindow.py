@@ -21,31 +21,25 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
 
         self._lesion = ControlText('Lesion')
-        ControlText('Lesion').value = self._usercomment['lesion']
+        self._lesion.value = super(ImageModel.ImageModel, self).__getattribute__('lesion')
 
         self._diagnosis = ControlText('Diagnosis')
-        ControlText('Diagnosis').value = self._usercomment['diagnosis']
+        self._diagnosis.value = super(ImageModel.ImageModel, self).__getattribute__('diagnosis')
 
         self._location = ControlText('Location')
-        ControlText('Location').value = self._usercomment['location']
+        self._location.value = super(ImageModel.ImageModel, self).__getattribute__('location')
 
         self._ditcomment = ControlText('Comment')
-        ControlText('Comment').value = self._usercomment['ditcomment']
+        self._ditcomment.value = super(ImageModel.ImageModel, self).__getattribute__('ditcomment')
+
 
         self._buttonSave = ControlButton('Save Tags')
-        self._buttonLoad = ControlButton('Load Tags')
 
         self._formset = ['_ditimage', '_ditid', '_lesion', '_diagnosis', '_location', '_ditcomment', '_buttonSave',
-                         '_buttonLoad', 'by www.dermatologist.co.in']
+                         'by www.dermatologist.co.in']
 
         # Define the button action
         self._buttonSave.value = self.__buttonSaveAction
-        self._buttonLoad.value = self.__buttonLoadAction
-
-    def __buttonLoadAction(self):
-        # imageModel = ImageModel.ImageModel(self._ditpath, self._ditfile)
-        # imageModel.ditid = self._usercomment['ditid']
-        self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
 
     def __buttonSaveAction(self):
         # self._usercomment['ditid'] = ControlText('Patient ID').value
