@@ -1,5 +1,5 @@
 import pexif
-
+import piexif
 import json
 
 class ImageModel(object):
@@ -17,18 +17,23 @@ class ImageModel(object):
 
         # Add exif in a file
         self._img = pexif.JpegFile.fromFile(ditpath + ditfile)
+        # Image Description Tag
         self._img.exif.primary.ImageDescription = "DITagger"
-        self._usercomment = json.loads(self._img.exif.primary.ExtendedEXIF.UserComment)
 
-        """
-        self._usercomment = {
-            'ditid': '',
-            'lesion': '',
-            'diagnosis': '',
-            'location': '',
-            'ditcomment': ''
-        }
-        """
+        exif_dict = piexif.load(self._ditpath + self._ditfile)
+
+        # 37510 is the tag id of UserComment
+        try:
+            self._usercomment = json.loads(exif_dict["Exif"][37510])
+        except:
+            self._usercomment = {
+                'ditid': '',
+                'lesion': '',
+                'diagnosis': '',
+                'location': '',
+                'ditcomment': ''
+            }
+
 
     @property
     def ditpath(self):
@@ -52,7 +57,8 @@ class ImageModel(object):
 
     @ditid.setter
     def ditid(self, ditid):
-        self._usercomment['ditid'] = ditid;
+        self._usercomment['ditid'] = ditid
+        self._ditsave()
 
     @property
     def lesion(self):
@@ -60,7 +66,7 @@ class ImageModel(object):
 
     @lesion.setter
     def lesion(self, lesion):
-        self._usercomment['lesion'] = lesion;
+        self._usercomment['lesion'] = lesion
 
     @property
     def diagnosis(self):
@@ -87,11 +93,13 @@ class ImageModel(object):
         self._usercomment['ditcomment'] = ditcomment
 
     def _ditsave(self):
+        # Save image using pexif
+        # Ref: https://github.com/bennoleslie/pexif
         self._img.exif.primary.ExtendedEXIF.UserComment = json.dumps(self._usercomment)
         self._img.writeFile(self._ditpath + self._ditfile)
 
     def hasIt(self, needle):
-        if needle in self._usercomment:
+        if needle in json.dumps(self._usercomment):
             return True
         else:
             return False
