@@ -17,7 +17,7 @@ class ImageWindow(BaseWidget):
         self._diagnosis = ControlText('Diagnosis')
         self._location = ControlText('Location')
         self._ditcomment = ControlText('Comments')
-        self._buttonImage = ControlButton('Save Image')
+        self._buttonImage = ControlButton('Save Tags')
 
         self._formset = ['_ditimage', '_ditid', '_lesion', '_diagnosis', '_location', '_ditcomment', '_buttonImage',
                          'by www.dermatologist.co.in']
