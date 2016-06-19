@@ -32,4 +32,4 @@ class ImageWindow(BaseWidget):
 
 
 # Execute the application
-if __name__ == "__main__":   pyforms.startApp(ImageWindow)
+# if __name__ == "__main__":   pyforms.startApp(ImageWindow)

@@ -63,7 +63,7 @@ class DitInterface(BaseWidget):
                 {'Restore': self.__dummyEvent},
                 {'Import': self.__dummyEvent},
                 '-',
-                {'Exit': self.__dummyEvent}
+                {'Exit': self.__exit}
 
             ]
             },
@@ -93,6 +93,9 @@ class DitInterface(BaseWidget):
 
     def __dummyEvent(self):
         print ("Menu option selected")
+
+    def __exit(self):
+        exit(0)
 
     def __fileOpen(self):
         self.loadWindow()
