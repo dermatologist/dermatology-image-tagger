@@ -42,12 +42,15 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._buttonSave.value = self.__buttonSaveAction
 
     def __buttonSaveAction(self):
+
+    def __buttonSaveAction(self):
         self._ditimage.value = self._ditpath + self._ditfile
         super(ImageModel.ImageModel, self).__setattr__('ditid', self._ditid.value)
         super(ImageModel.ImageModel, self).__setattr__('lesion', self._lesion.value)
         super(ImageModel.ImageModel, self).__setattr__('diagnosis', self._diagnosis.value)
         super(ImageModel.ImageModel, self).__setattr__('location', self._location.value)
         super(ImageModel.ImageModel, self).__setattr__('ditcomment', self._ditcomment.value)
+        self.ditsave()
         # In case the window has a parent
         # if self.parent!=None: self.parent.addPerson(self)
 
