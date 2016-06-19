@@ -9,15 +9,16 @@ import os.path
 
 
 class ImageWindow(ImageModel.ImageModel, BaseWidget):
-    def __init__(self, path, file):
-        ImageModel.ImageModel.__init__(self, path, file)
+    def __init__(self, ditpath, ditfile):
+        ImageModel.ImageModel.__init__(self, ditpath, ditfile)
         BaseWidget.__init__(self, 'Image window')
 
         # Definition of the forms fields
         self._ditimage = ControlImage()
-        self._ditimage.value = path + file
+        self._ditimage.value = self._ditpath + self._ditfile
 
         self._ditid = ControlText('Patient ID')
+        self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
 
         self._lesion = ControlText('Lesion')
         ControlText('Lesion').value = self._usercomment['lesion']
@@ -42,16 +43,17 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._buttonLoad.value = self.__buttonLoadAction
 
     def __buttonLoadAction(self):
-        ControlText('Patient ID').value = self._usercomment['ditid']
+        # imageModel = ImageModel.ImageModel(self._ditpath, self._ditfile)
+        # imageModel.ditid = self._usercomment['ditid']
+        self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
 
     def __buttonSaveAction(self):
-        self._usercomment['ditid'] = ControlText('Patient ID').value
-        self._usercomment['lesion'] = ControlText('Lesion').value
-        self._usercomment['diagnosis'] = ControlText('Diagnosis').value
-        self._usercomment['location'] = ControlText('Location').value
-        self._usercomment['ditcomment'] = ControlText('Comment').value
-        ImageModel.ImageModel.usercomment = self._usercomment
-
+        # self._usercomment['ditid'] = ControlText('Patient ID').value
+        # self._usercomment['lesion'] = ControlText('Lesion').value
+        # self._usercomment['diagnosis'] = ControlText('Diagnosis').value
+        # self._usercomment['location'] = ControlText('Location').value
+        # self._usercomment['ditcomment'] = ControlText('Comment').value
+        super(ImageModel.ImageModel, self).__setattr__('ditid', self._ditid.value)
         # In case the window has a parent
         # if self.parent!=None: self.parent.addPerson(self)
 
