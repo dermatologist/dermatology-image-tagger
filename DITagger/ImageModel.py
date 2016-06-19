@@ -1,5 +1,4 @@
-from PIL import Image
-import piexif
+import pexif
 
 import json
 
@@ -15,9 +14,12 @@ class ImageModel(object):
     def __init__(self, ditpath, ditfile):
         self._ditpath = ditpath
         self._ditfile = ditfile
-        self._im = Image.open(ditpath + ditfile)
-        self._exif_dict = piexif.load(self._im.info["exif"])
-        self._usercomment = json.loads(self._exif_dict["Exif"][piexif.ExifIFD.UserComment])
+
+        # Add exif in a file
+        self._img = pexif.JpegFile.fromFile(ditpath + ditfile)
+        self._img.exif.primary.ImageDescription = "DITagger"
+        self._usercomment = json.loads(self._img.exif.primary.ExtendedEXIF.UserComment)
+
         """
         self._usercomment = {
             'ditid': '',
@@ -85,9 +87,8 @@ class ImageModel(object):
         self._usercomment['ditcomment'] = ditcomment
 
     def _ditsave(self):
-        self._exif_dict["Exif"][piexif.ExifIFD.UserComment] = json.dumps(self._usercomment)
-        _exif_bytes = piexif.dump(self._exif_dict)
-        self._im.save(self._ditpath + self._ditfile, "jpeg", exif=_exif_bytes)
+        self._img.exif.primary.ExtendedEXIF.UserComment = json.dumps(self._usercomment)
+        self._img.writeFile(self._ditpath + self._ditfile)
 
     def hasIt(self, needle):
         if needle in self._usercomment:
