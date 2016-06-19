@@ -12,14 +12,12 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
     def __init__(self, path, file):
         ImageModel.ImageModel.__init__(self, path, file)
         BaseWidget.__init__(self, 'Image window')
-        print(path + file)
 
         # Definition of the forms fields
         self._ditimage = ControlImage()
         self._ditimage.value = path + file
 
         self._ditid = ControlText('Patient ID')
-        ControlText('Patient ID').value = self._usercomment['ditid']
 
         self._lesion = ControlText('Lesion')
         ControlText('Lesion').value = self._usercomment['lesion']
@@ -33,16 +31,27 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._ditcomment = ControlText('Comment')
         ControlText('Comment').value = self._usercomment['ditcomment']
 
-        self._buttonImage = ControlButton('Save Tags')
+        self._buttonSave = ControlButton('Save Tags')
+        self._buttonLoad = ControlButton('Load Tags')
 
-        self._formset = ['_ditimage', '_ditid', '_lesion', '_diagnosis', '_location', '_ditcomment', '_buttonImage',
-                         'by www.dermatologist.co.in']
+        self._formset = ['_ditimage', '_ditid', '_lesion', '_diagnosis', '_location', '_ditcomment', '_buttonSave',
+                         '_buttonLoad', 'by www.dermatologist.co.in']
 
         # Define the button action
-        self._buttonImage.value = self.__buttonAction
+        self._buttonSave.value = self.__buttonSaveAction
+        self._buttonLoad.value = self.__buttonLoadAction
 
-    def __buttonAction(self):
-        return
+    def __buttonLoadAction(self):
+        ControlText('Patient ID').value = self._usercomment['ditid']
+
+    def __buttonSaveAction(self):
+        self._usercomment['ditid'] = ControlText('Patient ID').value
+        self._usercomment['lesion'] = ControlText('Lesion').value
+        self._usercomment['diagnosis'] = ControlText('Diagnosis').value
+        self._usercomment['location'] = ControlText('Location').value
+        self._usercomment['ditcomment'] = ControlText('Comment').value
+        ImageModel.ImageModel.usercomment = self._usercomment
+
         # In case the window has a parent
         # if self.parent!=None: self.parent.addPerson(self)
 
