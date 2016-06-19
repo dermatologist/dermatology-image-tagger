@@ -10,15 +10,24 @@ __status__ = "Development"
 
 import pyforms
 from   pyforms import BaseWidget
+from   pyforms.Controls import ControlEmptyWidget
 from   pyforms.Controls import ControlText
 from   pyforms.Controls import ControlImage
 from   pyforms.Controls import ControlButton
 
+from DITagger import ImageWindow
 
 class DitInterface(BaseWidget):
     def __init__(self):
         super(DitInterface, self).__init__('Dermatology Image Tagger by Bell R Eapen')
+        self._panel = ControlEmptyWidget()
 
+        ##Image Window
+        self._win = ImageWindow.ImageWindow()
+        self._win.parent = self
+        self._panel.value = self._win
+
+        """
         # Definition of the forms fields
         self._ditimage = ControlImage()
         self._ditid = ControlText('Patient ID')
@@ -28,7 +37,7 @@ class DitInterface(BaseWidget):
         self._ditcomment = ControlText('Comments')
         self._buttonImage = ControlButton('Save Image')
 
-        """
+
         self._formset = [{
             'Image': ['_ditimage', '||', '_ditid', '||', '_lesion', '_diagnosis', '||', '_location', '||', '_ditcomment', '||', '_buttonImage'],
             'Search': ['_fullname'],
