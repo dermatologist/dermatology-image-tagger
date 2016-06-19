@@ -16,6 +16,7 @@ from   pyforms.Controls import ControlImage
 from   pyforms.Controls import ControlButton
 
 from DITagger import ImageWindow
+import os.path
 
 class DitInterface(BaseWidget):
     def __init__(self):
@@ -23,7 +24,7 @@ class DitInterface(BaseWidget):
         self._panel = ControlEmptyWidget()
 
         ##Image Window
-        self._win = ImageWindow.ImageWindow()
+        self._win = ImageWindow.ImageWindow(os.path.dirname(os.path.abspath(__file__)), '/blank.jpg')
         self._win.parent = self
         self._panel.value = self._win
 
