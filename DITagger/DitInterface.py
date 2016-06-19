@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
-__author__ = "Ricardo Ribeiro"
-__credits__ = ["Ricardo Ribeiro"]
-__license__ = "MIT"
-__version__ = "0.0"
-__maintainer__ = "Ricardo Ribeiro"
-__email__ = "ricardojvr@gmail.com"
+__author__ = "Bell Eapen"
+__credits__ = ["Bell Eapen"]
+__license__ = "GPL"
+__version__ = "0.2.0"
+__maintainer__ = "Bell Eapen"
+__email__ = "github@gulfdoctor.net"
 __status__ = "Development"
 
 import pyforms
@@ -57,7 +57,7 @@ class DitInterface(BaseWidget):
         # Define the window main menu using the property main menu
         self.mainmenu = [
             {'File': [
-                {'Open': self.__dummyEvent},
+                {'Open': self.__fileOpen},
                 '-',
                 {'Save': self.__dummyEvent},
                 {'Restore': self.__dummyEvent},
@@ -93,6 +93,12 @@ class DitInterface(BaseWidget):
 
     def __dummyEvent(self):
         print ("Menu option selected")
+
+    def __fileOpen(self):
+        self.loadWindow()
+
+    def loadWindowData(self, filename):
+        print ("Open option selected: " + filename)
 
 
 ##################################################################################################################
