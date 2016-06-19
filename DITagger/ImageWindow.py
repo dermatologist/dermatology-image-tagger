@@ -18,33 +18,30 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._ditimage.value = self._ditpath + self._ditfile
 
         self._ditid = ControlText('Patient ID')
-        self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
-
         self._lesion = ControlText('Lesion')
-        self._lesion.value = super(ImageModel.ImageModel, self).__getattribute__('lesion')
-
         self._diagnosis = ControlText('Diagnosis')
-        self._diagnosis.value = super(ImageModel.ImageModel, self).__getattribute__('diagnosis')
-
         self._location = ControlText('Location')
-        self._location.value = super(ImageModel.ImageModel, self).__getattribute__('location')
-
         self._ditcomment = ControlText('Comment')
-        self._ditcomment.value = super(ImageModel.ImageModel, self).__getattribute__('ditcomment')
-
 
         self._buttonSave = ControlButton('Save Tags')
+        self._buttonLoad = ControlButton('Load Tags')
 
         self._formset = ['_ditimage', '_ditid', '_lesion', '_diagnosis', '_location', '_ditcomment', '_buttonSave',
-                         'by www.dermatologist.co.in']
+                         '_buttonLoad', 'by www.dermatologist.co.in']
 
         # Define the button action
         self._buttonSave.value = self.__buttonSaveAction
+        self._buttonLoad.value = self.buttonLoadAction
 
-    def __buttonSaveAction(self):
-
-    def __buttonSaveAction(self):
+    def buttonLoadAction(self):
         self._ditimage.value = self._ditpath + self._ditfile
+        self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
+        self._lesion.value = super(ImageModel.ImageModel, self).__getattribute__('lesion')
+        self._diagnosis.value = super(ImageModel.ImageModel, self).__getattribute__('diagnosis')
+        self._location.value = super(ImageModel.ImageModel, self).__getattribute__('location')
+        self._ditcomment.value = super(ImageModel.ImageModel, self).__getattribute__('ditcomment')
+
+    def __buttonSaveAction(self):
         super(ImageModel.ImageModel, self).__setattr__('ditid', self._ditid.value)
         super(ImageModel.ImageModel, self).__setattr__('lesion', self._lesion.value)
         super(ImageModel.ImageModel, self).__setattr__('diagnosis', self._diagnosis.value)
