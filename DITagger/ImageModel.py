@@ -11,18 +11,6 @@ class ImageModel(object):
     Ref: stackoverflow 10833928
     """
 
-    # def __init__(self):
-        # TODO: Create backup if ImageDescription is not DITagger
-        # Add exif in a file
-    #self._img = pexif.JpegFile.fromFile(self._fullpath)
-        # Image Description Tag
-    #self._img.exif.primary.ImageDescription = "DITagger"
-
-    #exif_dict = piexif.load(self._fullpath)
-
-        # 37510 is the tag id of UserComment
-
-
     @property
     def fullpath(self):
         return self._fullpath
@@ -31,6 +19,8 @@ class ImageModel(object):
     def fullpath(self, fullpath):
         self._fullpath = fullpath
         self._img = pexif.JpegFile.fromFile(self._fullpath)
+        self._img.exif.primary.ImageDescription = "DITagger"
+        # TODO: Create backup if ImageDescription is not DITagger
         _exif_dict = piexif.load(self._fullpath)
         try:
             self._usercomment = json.loads(_exif_dict["Exif"][37510])

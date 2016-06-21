@@ -10,12 +10,10 @@ import os.path
 
 class ImageWindow(ImageModel.ImageModel, BaseWidget):
     def __init__(self):
-        # ImageModel.ImageModel.__init__(self)
         BaseWidget.__init__(self, 'Image window')
 
         # Definition of the forms fields
         self._ditimage = ControlImage()
-        #self._ditimage.value = self._fullpath
 
         self._ditid = ControlText('Patient ID')
         self._lesion = ControlText('Lesion')
