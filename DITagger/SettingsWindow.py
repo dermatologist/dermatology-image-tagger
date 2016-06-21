@@ -1,11 +1,6 @@
-import pyforms
 from pyforms import BaseWidget
-from pyforms.Controls import ControlText
-from pyforms.Controls import ControlButton
+from pyforms.Controls import ControlLabel
 from pyforms.Controls import ControlList
-
-from DITagger import ImageModel
-import os.path
 
 
 class SettingsWindow(BaseWidget):
@@ -13,14 +8,19 @@ class SettingsWindow(BaseWidget):
         BaseWidget.__init__(self, 'Settings window')
 
         # Definition of the forms fields
-        self._search = ControlText('Search')
-        self._buttonSearch = ControlButton('Search')
-        self._results = ControlList('Search')
-        self._results.horizontalHeaders = ['Image', 'Date Taken', 'Patient ID', 'Lesion',
-                                           'Diagnosis', 'Location', 'Comment', 'Tag Date']
-        self._results.selectEntireRow = True
-        self._formset = ['_search', '_buttonSearch', '_results', 'by www.dermatologist.co.in']
+        self._folder_label = ControlLabel('Folders to Search')
+        self._folders = ControlList('Folders',
+                                    plusFunction=self.__addFolderButtonAction,
+                                    minusFunction=self.__rmFolderButtonAction)
+        # self._folders.horizontalHeaders = ['Folders']
+        self._folders.selectEntireRow = True
+        self._formset = ['_folder_label', '_folders', 'by www.dermatologist.co.in']
 
+    def __addFolderButtonAction(self):
+        return
+
+    def __rmFolderButtonAction(self):
+        return
         # Define the button action
         # self._buttonSave.value = self.buttonSaveAction
         # self._buttonLoad.value = self.buttonLoadAction
