@@ -16,6 +16,8 @@ from   pyforms.Controls import ControlImage
 from   pyforms.Controls import ControlButton
 
 from DITagger import ImageWindow
+from DITagger import SearchWindow
+
 import os.path
 
 class DitInterface(BaseWidget):
@@ -23,8 +25,10 @@ class DitInterface(BaseWidget):
         super(DitInterface, self).__init__('Dermatology Image Tagger by Bell R Eapen')
         self._panel = ControlEmptyWidget()
 
-        # Image Window
+        # Windows
         self._win = ImageWindow.ImageWindow()
+        self._search_win = SearchWindow.SearchWindow()
+        self._search_win.parent = self
         self._win.parent = self
         self._panel.value = self._win
 
@@ -74,7 +78,7 @@ class DitInterface(BaseWidget):
             ]
             },
             {'Search': [
-                {'Find': self.__dummyEvent},
+                {'Find': self.__searchFind},
                 {'Find in Folder': self.__dummyEvent}
             ]
             },
@@ -99,16 +103,19 @@ class DitInterface(BaseWidget):
         exit(0)
 
     def __fileOpen(self):
-        # self._panel.value = self._win
         self.loadWindow()
+        self._panel.value = self._win
 
     def loadWindowData(self, filename):
         self._win.fullpath = filename
         self._win.buttonLoadAction()
 
     def __fileSave(self):
-        # self._panel.value = self._win
         self._win.buttonSaveAction()
+        self._panel.value = self._win
+
+    def __searchFind(self):
+        self._panel.value = self._search_win
 
 ##################################################################################################################
 ##################################################################################################################
