@@ -17,6 +17,7 @@ from   pyforms.Controls import ControlButton
 
 from DITagger import ImageWindow
 from DITagger import SearchWindow
+from DITagger import SettingsWindow
 
 import os.path
 
@@ -29,6 +30,8 @@ class DitInterface(BaseWidget):
         self._win = ImageWindow.ImageWindow()
         self._search_win = SearchWindow.SearchWindow()
         self._search_win.parent = self
+        self._settings_win = SettingsWindow.SettingsWindow()
+        self._settings_win.parent = self
         self._win.parent = self
         self._panel.value = self._win
 
@@ -83,7 +86,7 @@ class DitInterface(BaseWidget):
             ]
             },
             {'Settings': [
-                {'Default Path': self.__dummyEvent},
+                {'Default Settings': self.__settings},
                 {'Encryption': self.__dummyEvent},
                 {'Back Up': self.__dummyEvent}
 
@@ -101,6 +104,9 @@ class DitInterface(BaseWidget):
 
     def __exit(self):
         exit(0)
+
+    def __settings(self):
+        self._panel.value = self._settings_win
 
     def __fileOpen(self):
         self.loadWindow()
