@@ -102,7 +102,15 @@ class DitInterface(BaseWidget):
         self.loadWindow()
 
     def loadWindowData(self, filename):
-        print ("Open option selected: " + filename)
+        # print filename
+        self._win.ditpath = os.path.dirname(filename)
+        self._win.ditfile = os.pathsep + os.path.basename(filename)
+        self._win.fullpath = filename
+        # print self._win.fullpath
+        # print self._win.ditpath
+
+        self._win.buttonLoadAction()
+        # print ("Open option selected: " + filename)
 
 
 ##################################################################################################################

@@ -32,11 +32,12 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
                          '_buttonLoad', 'by www.dermatologist.co.in']
 
         # Define the button action
-        self._buttonSave.value = self.__buttonSaveAction
+        self._buttonSave.value = self.buttonSaveAction
         self._buttonLoad.value = self.buttonLoadAction
 
     def buttonLoadAction(self):
-        self._ditimage.value = self._ditpath + self._ditfile
+        # self._ditimage.value = self._ditpath + self._ditfile
+        print self._ditpath + self._ditfile  # @TODO debug
         self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
         self._lesion.value = super(ImageModel.ImageModel, self).__getattribute__('lesion')
         self._diagnosis.value = super(ImageModel.ImageModel, self).__getattribute__('diagnosis')
@@ -44,7 +45,7 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._ditcomment.value = super(ImageModel.ImageModel, self).__getattribute__('ditcomment')
         self._ditdate.value = super(ImageModel.ImageModel, self).__getattribute__('ditdate')
 
-    def __buttonSaveAction(self):
+    def buttonSaveAction(self):
         super(ImageModel.ImageModel, self).__setattr__('ditid', self._ditid.value)
         super(ImageModel.ImageModel, self).__setattr__('lesion', self._lesion.value)
         super(ImageModel.ImageModel, self).__setattr__('diagnosis', self._diagnosis.value)
