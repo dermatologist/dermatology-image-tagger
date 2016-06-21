@@ -32,7 +32,8 @@ class ImageModel(object):
                 'lesion': '',
                 'diagnosis': '',
                 'location': '',
-                'ditcomment': ''
+                'ditcomment': '',
+                'ditdate': ''
             }
 
 
@@ -99,6 +100,14 @@ class ImageModel(object):
     @ditcomment.setter
     def ditcomment(self, ditcomment):
         self._usercomment['ditcomment'] = ditcomment
+
+    @property
+    def ditdate(self):
+        return self._usercomment['ditdate']
+
+    @ditdate.setter
+    def ditdate(self, ditdate):
+        self._usercomment['ditdate'] = ditdate
 
     def ditsave(self):
         # Save image using pexif

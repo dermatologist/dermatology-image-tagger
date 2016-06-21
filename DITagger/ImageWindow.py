@@ -22,11 +22,13 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._diagnosis = ControlText('Diagnosis')
         self._location = ControlText('Location')
         self._ditcomment = ControlText('Comment')
+        self._ditdate = ControlText('Date')
 
         self._buttonSave = ControlButton('Save Tags')
         self._buttonLoad = ControlButton('Load Tags')
 
-        self._formset = ['_ditimage', '_ditid', '_lesion', '_diagnosis', '_location', '_ditcomment', '_buttonSave',
+        self._formset = ['_ditimage', '_ditid', '_lesion', '_diagnosis', '_location', '_ditcomment', '_ditdate',
+                         '_buttonSave',
                          '_buttonLoad', 'by www.dermatologist.co.in']
 
         # Define the button action
@@ -40,6 +42,7 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._diagnosis.value = super(ImageModel.ImageModel, self).__getattribute__('diagnosis')
         self._location.value = super(ImageModel.ImageModel, self).__getattribute__('location')
         self._ditcomment.value = super(ImageModel.ImageModel, self).__getattribute__('ditcomment')
+        self._ditdate.value = super(ImageModel.ImageModel, self).__getattribute__('ditdate')
 
     def __buttonSaveAction(self):
         super(ImageModel.ImageModel, self).__setattr__('ditid', self._ditid.value)
@@ -47,6 +50,7 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         super(ImageModel.ImageModel, self).__setattr__('diagnosis', self._diagnosis.value)
         super(ImageModel.ImageModel, self).__setattr__('location', self._location.value)
         super(ImageModel.ImageModel, self).__setattr__('ditcomment', self._ditcomment.value)
+        super(ImageModel.ImageModel, self).__setattr__('ditdate', self._ditdate.value)
         self.ditsave()
         # In case the window has a parent
         # if self.parent!=None: self.parent.addPerson(self)
