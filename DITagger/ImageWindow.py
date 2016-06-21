@@ -9,13 +9,13 @@ import os.path
 
 
 class ImageWindow(ImageModel.ImageModel, BaseWidget):
-    def __init__(self, ditpath, ditfile):
-        ImageModel.ImageModel.__init__(self, ditpath, ditfile)
+    def __init__(self, fullpath):
+        ImageModel.ImageModel.__init__(self, fullpath)
         BaseWidget.__init__(self, 'Image window')
 
         # Definition of the forms fields
         self._ditimage = ControlImage()
-        self._ditimage.value = self._ditpath + self._ditfile
+        self._ditimage.value = self._fullpath
 
         self._ditid = ControlText('Patient ID')
         self._lesion = ControlText('Lesion')
@@ -36,8 +36,7 @@ class ImageWindow(ImageModel.ImageModel, BaseWidget):
         self._buttonLoad.value = self.buttonLoadAction
 
     def buttonLoadAction(self):
-        # self._ditimage.value = self._ditpath + self._ditfile
-        print self._ditpath + self._ditfile  # @TODO debug
+        self._ditimage.value = self._fullpath
         self._ditid.value = super(ImageModel.ImageModel, self).__getattribute__('ditid')
         self._lesion.value = super(ImageModel.ImageModel, self).__getattribute__('lesion')
         self._diagnosis.value = super(ImageModel.ImageModel, self).__getattribute__('diagnosis')

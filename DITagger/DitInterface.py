@@ -24,7 +24,7 @@ class DitInterface(BaseWidget):
         self._panel = ControlEmptyWidget()
 
         ##Image Window
-        self._win = ImageWindow.ImageWindow(os.path.dirname(os.path.abspath(__file__)), '/blank.jpg')
+        self._win = ImageWindow.ImageWindow(os.path.dirname(os.path.abspath(__file__)) + '/blank.jpg')
         self._win.parent = self
         self._panel.value = self._win
 

@@ -11,10 +11,8 @@ class ImageModel(object):
     Ref: stackoverflow 10833928
     """
 
-    def __init__(self, ditpath, ditfile):
-        self._ditpath = ditpath
-        self._ditfile = ditfile
-        self._fullpath = ditpath + ditfile
+    def __init__(self, fullpath):
+        self._fullpath = fullpath
         # TODO: Create backup if ImageDescription is not DITagger
         # Add exif in a file
         self._img = pexif.JpegFile.fromFile(self._fullpath)
@@ -35,23 +33,6 @@ class ImageModel(object):
                 'ditcomment': '',
                 'ditdate': ''
             }
-
-
-    @property
-    def ditpath(self):
-        return self._ditpath
-
-    @ditpath.setter
-    def ditpath(self, ditpath):
-        self._ditpath = ditpath
-
-    @property
-    def ditfile(self):
-        return self._ditfile
-
-    @ditfile.setter
-    def ditfile(self, ditfile):
-        self._ditfile = ditfile
 
     @property
     def fullpath(self):
