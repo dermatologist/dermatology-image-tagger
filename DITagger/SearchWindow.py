@@ -13,12 +13,12 @@ class SearchWindow(BaseWidget):
         BaseWidget.__init__(self, 'Search window')
 
         # Definition of the forms fields
-
-
         self._search = ControlText('Search')
         self._buttonSearch = ControlButton('Search')
         self._results = ControlList('Search')
-
+        self._results.horizontalHeaders = ['Image', 'Date Taken', 'Patient ID', 'Lesion',
+                                           'Diagnosis', 'Location', 'Comment', 'Tag Date']
+        self._results.selectEntireRow = True
         self._formset = ['_search', '_buttonSearch', '_results', 'by www.dermatologist.co.in']
 
         # Define the button action
