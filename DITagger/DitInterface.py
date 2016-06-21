@@ -23,8 +23,8 @@ class DitInterface(BaseWidget):
         super(DitInterface, self).__init__('Dermatology Image Tagger by Bell R Eapen')
         self._panel = ControlEmptyWidget()
 
-        ##Image Window
-        self._win = ImageWindow.ImageWindow(os.path.dirname(os.path.abspath(__file__)) + '/blank.jpg')
+        # Image Window
+        self._win = ImageWindow.ImageWindow()
         self._win.parent = self
         self._panel.value = self._win
 
@@ -60,7 +60,7 @@ class DitInterface(BaseWidget):
             {'File': [
                 {'Open': self.__fileOpen},
                 '-',
-                {'Save': self.__dummyEvent},
+                {'Save': self.__fileSave},
                 {'Restore': self.__dummyEvent},
                 {'Import': self.__dummyEvent},
                 '-',
@@ -99,19 +99,16 @@ class DitInterface(BaseWidget):
         exit(0)
 
     def __fileOpen(self):
+        # self._panel.value = self._win
         self.loadWindow()
 
     def loadWindowData(self, filename):
-        # print filename
-        self._win.ditpath = os.path.dirname(filename)
-        self._win.ditfile = os.pathsep + os.path.basename(filename)
         self._win.fullpath = filename
-        # print self._win.fullpath
-        # print self._win.ditpath
-
         self._win.buttonLoadAction()
-        # print ("Open option selected: " + filename)
 
+    def __fileSave(self):
+        # self._panel.value = self._win
+        self._win.buttonSaveAction()
 
 ##################################################################################################################
 ##################################################################################################################
