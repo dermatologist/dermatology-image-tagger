@@ -1,16 +1,21 @@
+import fnmatch
+import os
+
 from pyforms import BaseWidget
 from pyforms.Controls import ControlButton
 from pyforms.Controls import ControlList
 from pyforms.Controls import ControlText
 
+from DITagger import ImageModel
 from DITagger import SettingsModel
 
 
-class SearchWindow(SettingsModel.SettingsModel, BaseWidget):
+class SearchWindow(ImageModel.ImageModel, SettingsModel.SettingsModel, BaseWidget):
     def __init__(self):
         BaseWidget.__init__(self, 'Search window')
         SettingsModel.SettingsModel.__init__(self)
-        SettingsModel.SettingsModel.load()
+
+        self.load()
 
         # Definition of the forms fields
         self._search = ControlText('Search')
@@ -25,10 +30,16 @@ class SearchWindow(SettingsModel.SettingsModel, BaseWidget):
         self._buttonSearch.value = self.__buttonSearchAction
         # self._buttonLoad.value = self.buttonLoadAction
 
+    # Ref: Stackoverflow: 2186525
     def __buttonSearchAction(self):
         _folderList = self.get_setting('folders')
         for _folder in _folderList:
-            return
+            for root, dirnames, filenames in os.walk(_folder):
+                for filename in fnmatch.filter(filenames, '*.jpg'):
+                    super(ImageModel.ImageModel, self).__setattr__ \
+                        ('fullpath', os.path.join(root, filename))
+                    if self.hasIt(self._search.value):
+                        self._results += [filename]
         # In case the window has a parent
         # if self.parent!=None: self.parent.addPerson(self)
 
