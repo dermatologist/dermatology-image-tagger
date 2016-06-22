@@ -2,6 +2,10 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
+.. image:: https://travis-ci.org/dermatologist/dermatology-image-tagger.svg?branch=master
+:target: https://travis-ci.org/dermatologist/dermatology-image-tagger
+   :alt: Build (Master)
+
 ==============
 dermatology-image-tagger
 ==============
