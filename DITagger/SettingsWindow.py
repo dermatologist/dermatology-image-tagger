@@ -11,6 +11,7 @@ class SettingsWindow(SettingsModel.SettingsModel, BaseWidget):
     def __init__(self):
         BaseWidget.__init__(self, 'Settings window')
         SettingsModel.SettingsModel.__init__(self)
+        self._folder_list = []
 
         # Definition of the forms fields
         self._folder_label = ControlLabel('Folders to Search')
@@ -32,17 +33,27 @@ class SettingsWindow(SettingsModel.SettingsModel, BaseWidget):
         self._buttonLoad.value = self.__buttonLoadAction
 
     def __addFolderButtonAction(self):
-        print self._folder.value
-        self._folders += [self._folder.value]
+        self._folder_list.append(self._folder.value)
+        self.__updateFolderControl()
 
     def __rmFolderButtonAction(self):
-        return
+        self._folder_list.remove(self._folders.getCurrentRowValue()[0])  # First element of solitary list
+        self.__updateFolderControl()
 
     def __buttonSaveAction(self):
+        self.add_setting('folders', self._folder_list)
+        self.__updateFolderControl()
         self.save()
 
     def __buttonLoadAction(self):
         self.load()
+        self._folder_list = self.get_setting('folders')
+        self.__updateFolderControl()
+
+    def __updateFolderControl(self):
+        self._folders.clear()
+        for _folder in self._folder_list:
+            self._folders += [_folder]
         # Define the button action
         # self._buttonSave.value = self.buttonSaveAction
         # self._buttonLoad.value = self.buttonLoadAction
