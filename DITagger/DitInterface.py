@@ -16,14 +16,22 @@ from   pyforms.Controls import ControlImage
 from   pyforms.Controls import ControlButton
 
 from DITagger import ImageWindow
+from DITagger import SearchWindow
+from DITagger import SettingsWindow
+
+import os.path
 
 class DitInterface(BaseWidget):
     def __init__(self):
         super(DitInterface, self).__init__('Dermatology Image Tagger by Bell R Eapen')
         self._panel = ControlEmptyWidget()
 
-        ##Image Window
+        # Windows
         self._win = ImageWindow.ImageWindow()
+        self._search_win = SearchWindow.SearchWindow()
+        self._search_win.parent = self
+        self._settings_win = SettingsWindow.SettingsWindow()
+        self._settings_win.parent = self
         self._win.parent = self
         self._panel.value = self._win
 
@@ -59,7 +67,7 @@ class DitInterface(BaseWidget):
             {'File': [
                 {'Open': self.__fileOpen},
                 '-',
-                {'Save': self.__dummyEvent},
+                {'Save': self.__fileSave},
                 {'Restore': self.__dummyEvent},
                 {'Import': self.__dummyEvent},
                 '-',
@@ -73,12 +81,12 @@ class DitInterface(BaseWidget):
             ]
             },
             {'Search': [
-                {'Find': self.__dummyEvent},
+                {'Find': self.__searchFind},
                 {'Find in Folder': self.__dummyEvent}
             ]
             },
             {'Settings': [
-                {'Default Path': self.__dummyEvent},
+                {'Default Settings': self.__settings},
                 {'Encryption': self.__dummyEvent},
                 {'Back Up': self.__dummyEvent}
 
@@ -97,12 +105,23 @@ class DitInterface(BaseWidget):
     def __exit(self):
         exit(0)
 
+    def __settings(self):
+        self._panel.value = self._settings_win
+
     def __fileOpen(self):
         self.loadWindow()
+        self._panel.value = self._win
 
     def loadWindowData(self, filename):
-        print ("Open option selected: " + filename)
+        self._win.fullpath = filename
+        self._win.buttonLoadAction()
 
+    def __fileSave(self):
+        self._win.buttonSaveAction()
+        self._panel.value = self._win
+
+    def __searchFind(self):
+        self._panel.value = self._search_win
 
 ##################################################################################################################
 ##################################################################################################################

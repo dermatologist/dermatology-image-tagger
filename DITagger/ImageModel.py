@@ -11,47 +11,6 @@ class ImageModel(object):
     Ref: stackoverflow 10833928
     """
 
-    def __init__(self, ditpath, ditfile):
-        self._ditpath = ditpath
-        self._ditfile = ditfile
-        self._fullpath = ditpath + ditfile
-        # TODO: Create backup if ImageDescription is not DITagger
-        # Add exif in a file
-        self._img = pexif.JpegFile.fromFile(self._fullpath)
-        # Image Description Tag
-        self._img.exif.primary.ImageDescription = "DITagger"
-
-        exif_dict = piexif.load(self._fullpath)
-
-        # 37510 is the tag id of UserComment
-        try:
-            self._usercomment = json.loads(exif_dict["Exif"][37510])
-        except:
-            self._usercomment = {
-                'ditid': '',
-                'lesion': '',
-                'diagnosis': '',
-                'location': '',
-                'ditcomment': ''
-            }
-
-
-    @property
-    def ditpath(self):
-        return self._ditpath
-
-    @ditpath.setter
-    def ditpath(self, ditpath):
-        self._ditpath = ditpath
-
-    @property
-    def ditfile(self):
-        return self._ditfile
-
-    @ditfile.setter
-    def ditfile(self, ditfile):
-        self._ditfile = ditfile
-
     @property
     def fullpath(self):
         return self._fullpath
@@ -59,6 +18,21 @@ class ImageModel(object):
     @fullpath.setter
     def fullpath(self, fullpath):
         self._fullpath = fullpath
+        self._img = pexif.JpegFile.fromFile(self._fullpath)
+        self._img.exif.primary.ImageDescription = "DITagger"
+        # TODO: Create backup if ImageDescription is not DITagger
+        _exif_dict = piexif.load(self._fullpath)
+        try:
+            self._usercomment = json.loads(_exif_dict["Exif"][37510])
+        except:
+            self._usercomment = {
+                'ditid': '',
+                'lesion': '',
+                'diagnosis': '',
+                'location': '',
+                'ditcomment': '',
+                'ditdate': ''
+            }
 
     @property
     def ditid(self):
@@ -67,7 +41,6 @@ class ImageModel(object):
     @ditid.setter
     def ditid(self, ditid):
         self._usercomment['ditid'] = ditid
-        self._ditsave()
 
     @property
     def lesion(self):
@@ -76,7 +49,6 @@ class ImageModel(object):
     @lesion.setter
     def lesion(self, lesion):
         self._usercomment['lesion'] = lesion
-        self._ditsave()
 
     @property
     def diagnosis(self):
@@ -85,7 +57,6 @@ class ImageModel(object):
     @diagnosis.setter
     def diagnosis(self, diagnosis):
         self._usercomment['diagnosis'] = diagnosis
-        self._ditsave()
 
     @property
     def location(self):
@@ -94,7 +65,6 @@ class ImageModel(object):
     @location.setter
     def location(self, location):
         self._usercomment['location'] = location
-        self._ditsave()
 
     @property
     def ditcomment(self):
@@ -103,9 +73,16 @@ class ImageModel(object):
     @ditcomment.setter
     def ditcomment(self, ditcomment):
         self._usercomment['ditcomment'] = ditcomment
-        self._ditsave()
 
-    def _ditsave(self):
+    @property
+    def ditdate(self):
+        return self._usercomment['ditdate']
+
+    @ditdate.setter
+    def ditdate(self, ditdate):
+        self._usercomment['ditdate'] = ditdate
+
+    def ditsave(self):
         # Save image using pexif
         # Ref: https://github.com/bennoleslie/pexif
         self._img.exif.primary.ExtendedEXIF.UserComment = json.dumps(self._usercomment)
