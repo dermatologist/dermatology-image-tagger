@@ -29,7 +29,7 @@ class SearchWindow(ImageModel.ImageModel, SettingsModel.SettingsModel, BaseWidge
         self._buttonSearch.value = self.__buttonSearchAction
         # self._buttonLoad.value = self.buttonLoadAction
 
-    # Ref: Stackoverflow: 2186525
+    # Ref: Stackoverflow: 5351766
     def __buttonSearchAction(self):
         _folderList = self.get_setting('folders')
         for _folder in _folderList:
