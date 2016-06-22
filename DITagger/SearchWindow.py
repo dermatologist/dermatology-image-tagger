@@ -1,4 +1,3 @@
-import fnmatch
 import os
 
 from pyforms import BaseWidget
@@ -34,12 +33,13 @@ class SearchWindow(ImageModel.ImageModel, SettingsModel.SettingsModel, BaseWidge
     def __buttonSearchAction(self):
         _folderList = self.get_setting('folders')
         for _folder in _folderList:
-            for root, dirnames, filenames in os.walk(_folder):
-                for filename in fnmatch.filter(filenames, '*.jpg'):
-                    super(ImageModel.ImageModel, self).__setattr__ \
-                        ('fullpath', os.path.join(root, filename))
-                    if self.hasIt(self._search.value):
-                        self._results += [filename]
+            for root, dirs, files in os.walk(_folder):
+                for filename in files:
+                    if filename.lower().endswith(('.jpg', '.jpeg')):
+                        super(ImageModel.ImageModel, self).__setattr__ \
+                            ('fullpath', os.path.join(root, filename))
+                        if self.hasIt(self._search.value):
+                            self._results += [filename]
         # In case the window has a parent
         # if self.parent!=None: self.parent.addPerson(self)
 
