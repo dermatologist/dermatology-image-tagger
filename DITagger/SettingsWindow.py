@@ -1,5 +1,6 @@
 from pyforms import BaseWidget
 from pyforms.Controls import ControlButton
+from pyforms.Controls import ControlDir
 from pyforms.Controls import ControlLabel
 from pyforms.Controls import ControlList
 
@@ -16,12 +17,13 @@ class SettingsWindow(SettingsModel.SettingsModel, BaseWidget):
         self._folders = ControlList('Folders',
                                     plusFunction=self.__addFolderButtonAction,
                                     minusFunction=self.__rmFolderButtonAction)
+        self._folder = ControlDir('Select Folder')
         self._buttonSave = ControlButton('Save Settings')
         self._buttonLoad = ControlButton('Load Settings')
 
         # self._folders.horizontalHeaders = ['Folders']
         self._folders.selectEntireRow = True
-        self._formset = ['_folder_label', '_folders',
+        self._formset = ['_folder_label', '_folder', '_folders',
                          '_buttonLoad', '_buttonSave',
                          'by www.dermatologist.co.in']
 
@@ -30,7 +32,8 @@ class SettingsWindow(SettingsModel.SettingsModel, BaseWidget):
         self._buttonLoad.value = self.__buttonLoadAction
 
     def __addFolderButtonAction(self):
-        return
+        print self._folder.value
+        self._folders += [self._folder.value]
 
     def __rmFolderButtonAction(self):
         return
