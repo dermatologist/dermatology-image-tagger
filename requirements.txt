@@ -13,13 +13,7 @@ coveralls
 sphinx
 
 pyqt
-matplotlib
-opencv
-pyopengl
-visvis
-pyforms
-esky
-
+piexif
 
 #nose-cov
 #beautifulsoup4

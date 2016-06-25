@@ -9,6 +9,7 @@
 # Copyright (c) 2016, Bell Eapen <github@gulfdoctor.net>
 
 from setuptools import setup, find_packages
+
 from DITagger import __version__
 
 tests_require = [
@@ -48,12 +49,7 @@ Dermatology Image Tagger
     include_package_data=True,
     install_requires=[
         'pyqt',
-        'matplotlib',
-        'opencv',
-        'pyopengl',
-        'visvis',
-        'pyforms',
-        'esky',
+        'piexif',
 
         # add your dependencies here
         # remember to use 'package-name>=x.y.z,<x.y+1.0' notation (this way you get bugfixes)
