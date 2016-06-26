@@ -1,4 +1,5 @@
 import json
+import os.path
 import pickle
 
 import piexif
@@ -115,5 +116,6 @@ class SettingsModel(object):
         pickle.dump(self._settings, output)
 
     def load(self):
-        pkl_file = open(self._filename, 'rb')
-        self._settings = pickle.load(pkl_file)
+        if os.path.isfile(self._filename):
+            pkl_file = open(self._filename, 'rb')
+            self._settings = pickle.load(pkl_file)
