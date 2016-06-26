@@ -6,3 +6,8 @@ of repetition like this.
 ```
        ImageModel.ImageModel.__init__(self, os.path.dirname(os.path.abspath(__file__)), '/blank.jpg')
 ```
+
+# adding conda packages
+```
+conda install -c acellera pyinstaller
+```

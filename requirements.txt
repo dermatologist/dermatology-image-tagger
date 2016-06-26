@@ -12,14 +12,9 @@ ipdb
 coveralls
 sphinx
 
-pyqt
-matplotlib
-opencv
-pyopengl
-visvis
-pyforms
-esky
-
+# pyqt Add through conda
+piexif
+PyQt4
 
 #nose-cov
 #beautifulsoup4
