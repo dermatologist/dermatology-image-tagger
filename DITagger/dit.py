@@ -9,11 +9,12 @@ from DITagger import version, model, windows_ui  # This file holds our MainWindo
 class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
     def __init__(self):
         super(self.__class__, self).__init__()
-        self.setupUi(self)
-        self.stackedWidget.setCurrentWidget(self.FileWidget)
         self.settings = model.SettingsModel()
         self.image = model.ImageModel()
         self.settings.load()
+        self.setupUi(self)
+        self.stackedWidget.setCurrentWidget(self.FileWidget)
+        self.on_loadSettingButton_clicked()
 
     @QtCore.pyqtSlot()
     def on_actionOpen_triggered(self):
@@ -85,20 +86,24 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
         _folders = []
         for index in xrange(self.folderList.count()):
             _folders.append(self.folderList.item(index))
+        _folders = list(set(_folders))  # Remove Duplicates
         _labels = [i.text() for i in _folders]
         self.settings.add_setting('folders', _labels)
         self.settings.save()
 
     @QtCore.pyqtSlot()
     def on_loadSettingButton_clicked(self):
+        self.folderList.clear()
         self.settings.load()
         _folders = self.settings.get_setting('folders')
+        _folders = list(set(_folders))  # Remove Duplicates
         for _folder in _folders:
             self.folderList.addItem(_folder)
 
     @QtCore.pyqtSlot()
     def on_searchButton_clicked(self):
         _buffer = []
+        self.searchList.clear()
         for index in xrange(self.folderList.count()):
             _buffer.append(self.folderList.item(index))
         _folderList = [i.text() for i in _buffer]
