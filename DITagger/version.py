@@ -8,4 +8,11 @@
 # http://www.opensource.org/licenses/GPL-license
 # Copyright (c) 2016, Bell Eapen <github@gulfdoctor.net>
 
-__version__ = '0.1.0'  # NOQA
+__version__ = '0.5.0'  # NOQA
+__author__ = "Bell Eapen"
+__credits__ = ["Bell Eapen"]
+__license__ = "GPL"
+__version__ = "0.2.0"
+__maintainer__ = "Bell Eapen"
+__email__ = "github@gulfdoctor.net"
+__status__ = "Development"
