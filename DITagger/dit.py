@@ -3,7 +3,7 @@ import sys  # We need sys so that we can pass argv to QApplication
 
 from PyQt4 import QtCore, QtGui
 
-from DITagger import model, windows_ui  # This file holds our MainWindow and all design related things
+from DITagger import version, model, windows_ui  # This file holds our MainWindow and all design related things
 
 
 class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
@@ -14,10 +14,6 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
         self.settings = model.SettingsModel()
         self.image = model.ImageModel()
         self.settings.load()
-        # This is defined in windows_ui.py file automatically
-        # It sets up layout and widgets that are defined
-        # self.actionOpen.connect(self.browse_folder()) # When the button is pressed
-        # Execute browse_folder function
 
     @QtCore.pyqtSlot()
     def on_actionOpen_triggered(self):
@@ -65,6 +61,15 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
         self.stackedWidget.setCurrentWidget(self.SearchWidget)
 
     @QtCore.pyqtSlot()
+    def on_actionFind_triggered(self):
+        self.stackedWidget.setCurrentWidget(self.SearchWidget)
+
+    @QtCore.pyqtSlot()
+    def on_actionAbout_triggered(self):
+        self.stackedWidget.setCurrentWidget(self.helpWidget)
+        self.helpVersionLbl.setText(version.__version__)
+
+    @QtCore.pyqtSlot()
     def on_chooseFolderButton_clicked(self):
         _folder = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Folder"))
         self.folderList.addItem(_folder)
@@ -105,6 +110,32 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
                         if self.image.hasIt(str(self.searchTxt.text())):
                             self.searchList.addItem(self.image.fullpath)
 
+    @QtCore.pyqtSlot()
+    def on_searchList_itemSelectionChanged(self):
+        _selected = self.searchList.currentItem()
+        _dit = QtCore.QString('')
+        self.image.fullpath = str(_selected.text())
+        _pixmap = QtGui.QPixmap(_selected.text())
+        self.searchImageLbl.setPixmap(_pixmap)
+        _dit.append('ID: ')
+        _dit.append(self.image.ditid)
+        _dit.append('\n')
+        _dit.append('Lesion: ')
+        _dit.append(self.image.lesion)
+        _dit.append('\n')
+        _dit.append('Diagnosis: ')
+        _dit.append(self.image.diagnosis)
+        _dit.append('\n')
+        _dit.append('Location: ')
+        _dit.append(self.image.location)
+        _dit.append('\n')
+        _dit.append('Date: ')
+        _dit.append(self.image.ditdate)
+        _dit.append('\n')
+        _dit.append('Comment: ')
+        _dit.append('\n')
+        _dit.append(self.image.ditcomment)
+        self.searchLbl.setText(_dit)
 
 
     @QtCore.pyqtSlot()

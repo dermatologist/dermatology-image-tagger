@@ -176,12 +176,16 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QGraphicsView" name="pictureSearchView"/>
+           <widget class="QLabel" name="searchImageLbl">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="searchLbl">
             <property name="text">
-             <string>TextLabel</string>
+             <string/>
             </property>
            </widget>
           </item>
