@@ -42,9 +42,10 @@ class Ui_MainWindow(object):
         self.verticalLayoutWidget_2.setObjectName(_fromUtf8("verticalLayoutWidget_2"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.pictureView = QtGui.QGraphicsView(self.verticalLayoutWidget_2)
-        self.pictureView.setObjectName(_fromUtf8("pictureView"))
-        self.verticalLayout_2.addWidget(self.pictureView)
+        self.pictureViewLbl = QtGui.QLabel(self.verticalLayoutWidget_2)
+        self.pictureViewLbl.setText(_fromUtf8(""))
+        self.pictureViewLbl.setObjectName(_fromUtf8("pictureViewLbl"))
+        self.verticalLayout_2.addWidget(self.pictureViewLbl)
         self.formLayoutWidget = QtGui.QWidget(self.FileWidget)
         self.formLayoutWidget.setGeometry(QtCore.QRect(0, 220, 641, 245))
         self.formLayoutWidget.setObjectName(_fromUtf8("formLayoutWidget"))
@@ -239,7 +240,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

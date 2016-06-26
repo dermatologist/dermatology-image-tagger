@@ -27,7 +27,7 @@
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="FileWidget">
         <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -41,7 +41,11 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QGraphicsView" name="pictureView"/>
+           <widget class="QLabel" name="pictureViewLbl">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
