@@ -1,2 +1,2 @@
 
-~/anaconda3/envs/qt/bin/designer-qt4
+~/anaconda3/envs/pyforms/bin/designer-qt4
