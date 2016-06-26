@@ -1,46 +1,51 @@
-from unittest import TestCase
-from DITagger import ImageModel
 import os.path
+from unittest import TestCase
+
+from DITagger import model
 
 
 class TestImageModel(TestCase):
     def setUp(self):
-        imageModel = ImageModel.ImageModel(os.path.dirname(os.path.abspath(__file__)), '/test1.JPG')
-        imageModel.ditid = 'Patient'
-        imageModel.lesion = 'Papule'
-        imageModel.diagnosis = 'Lichen Planus'
-        imageModel.location = 'Wrist'
-        imageModel.ditcomment = 'Self Limiting'
+        self.imageModel = model.ImageModel()
+        self.imageModel.fullpath = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'test1.JPG'
+        self.imageModel.ditid = 'Patient'
+        self.imageModel.lesion = 'Papule'
+        self.imageModel.diagnosis = 'Lichen Planus'
+        self.imageModel.location = 'Wrist'
+        self.imageModel.ditcomment = 'Self Limiting'
+        self.imageModel.ditsave()
 
     def tearDown(self):
-        imageModel = ImageModel.ImageModel(os.path.dirname(os.path.abspath(__file__)), '/test1.JPG')
-        imageModel.ditid = ''
-        imageModel.lesion = ''
-        imageModel.diagnosis = ''
-        imageModel.location = ''
-        imageModel.ditcomment = ''
+        self.imageModel = model.ImageModel()
+        self.imageModel.fullpath = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'test1.JPG'
+        self.imageModel.ditid = ''
+        self.imageModel.lesion = ''
+        self.imageModel.diagnosis = ''
+        self.imageModel.location = ''
+        self.imageModel.ditcomment = ''
+        self.imageModel.ditsave()
 
     def test_ditid(self):
-        imageModel = ImageModel.ImageModel(os.path.dirname(os.path.abspath(__file__)), '/test1.JPG')
-        self.assertEqual(imageModel.ditid, 'Patient', 'id tag test')
-        self.assertTrue(imageModel.hasIt('Patient'))
+        self.imageModel.fullpath = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'test1.JPG'
+        self.assertEqual(self.imageModel.ditid, 'Patient', 'id tag test')
+        self.assertTrue(self.imageModel.hasIt('Patient'))
 
     def test_lesion(self):
-        imageModel = ImageModel.ImageModel(os.path.dirname(os.path.abspath(__file__)), '/test1.JPG')
-        self.assertEqual(imageModel.lesion, 'Papule', 'Lesion Test')
-        self.assertTrue(imageModel.hasIt('Papule'))
+        self.imageModel.fullpath = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'test1.JPG'
+        self.assertEqual(self.imageModel.lesion, 'Papule', 'Lesion Test')
+        self.assertTrue(self.imageModel.hasIt('Papule'))
 
     def test_diagnosis(self):
-        imageModel = ImageModel.ImageModel(os.path.dirname(os.path.abspath(__file__)), '/test1.JPG')
-        self.assertEqual(imageModel.diagnosis, 'Lichen Planus', 'Diagnosis Test')
-        self.assertTrue(imageModel.hasIt('Lichen Planus'))
+        self.imageModel.fullpath = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'test1.JPG'
+        self.assertEqual(self.imageModel.diagnosis, 'Lichen Planus', 'Diagnosis Test')
+        self.assertTrue(self.imageModel.hasIt('Lichen Planus'))
 
     def test_location(self):
-        imageModel = ImageModel.ImageModel(os.path.dirname(os.path.abspath(__file__)), '/test1.JPG')
-        self.assertEqual(imageModel.location, 'Wrist', 'Location Test')
-        self.assertTrue(imageModel.hasIt('Wrist'))
+        self.imageModel.fullpath = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'test1.JPG'
+        self.assertEqual(self.imageModel.location, 'Wrist', 'Location Test')
+        self.assertTrue(self.imageModel.hasIt('Wrist'))
 
     def test_ditcomment(self):
-        imageModel = ImageModel.ImageModel(os.path.dirname(os.path.abspath(__file__)), '/test1.JPG')
-        self.assertEqual(imageModel.ditcomment, 'Self Limiting', 'Comment Test')
-        self.assertTrue(imageModel.hasIt('Self Limiting'))
+        self.imageModel.fullpath = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'test1.JPG'
+        self.assertEqual(self.imageModel.ditcomment, 'Self Limiting', 'Comment Test')
+        self.assertTrue(self.imageModel.hasIt('Self Limiting'))
