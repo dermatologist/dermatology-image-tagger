@@ -12,7 +12,7 @@ ipdb
 coveralls
 sphinx
 
-pyqt
+# pyqt Add through conda
 piexif
 
 #nose-cov
