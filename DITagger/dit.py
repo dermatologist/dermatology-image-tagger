@@ -1,14 +1,16 @@
+import os.path
 import sys  # We need sys so that we can pass argv to QApplication
 
 from PyQt4 import QtCore, QtGui
 
 from DITagger import model, windows_ui  # This file holds our MainWindow and all design related things
 
+
 class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.setupUi(self)
-        self.FileWidget.show()
+        self.stackedWidget.setCurrentWidget(self.FileWidget)
         self.settings = model.SettingsModel()
         self.image = model.ImageModel()
         self.settings.load()
@@ -59,8 +61,51 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
         self.stackedWidget.setCurrentWidget(self.SettingsWidget)
 
     @QtCore.pyqtSlot()
+    def on_actionFind_triggered(self):
+        self.stackedWidget.setCurrentWidget(self.SearchWidget)
+
+    @QtCore.pyqtSlot()
     def on_chooseFolderButton_clicked(self):
-        print "pressed"
+        _folder = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Folder"))
+        self.folderList.addItem(_folder)
+
+    @QtCore.pyqtSlot()
+    def on_folderRemoveButton_clicked(self):
+        # stackoverflow 23145051
+        for _folder in self.folderList.selectedItems():
+            self.folderList.takeItem(self.folderList.row(_folder))
+
+    @QtCore.pyqtSlot()
+    def on_saveSettingButton_clicked(self):
+        _folders = []
+        for index in xrange(self.folderList.count()):
+            _folders.append(self.folderList.item(index))
+        _labels = [i.text() for i in _folders]
+        self.settings.add_setting('folders', _labels)
+        self.settings.save()
+
+    @QtCore.pyqtSlot()
+    def on_loadSettingButton_clicked(self):
+        self.settings.load()
+        _folders = self.settings.get_setting('folders')
+        for _folder in _folders:
+            self.folderList.addItem(_folder)
+
+    @QtCore.pyqtSlot()
+    def on_searchButton_clicked(self):
+        _buffer = []
+        for index in xrange(self.folderList.count()):
+            _buffer.append(self.folderList.item(index))
+        _folderList = [i.text() for i in _buffer]
+        for _folder in _folderList:
+            for root, dirs, files in os.walk(str(_folder)):
+                for filename in files:
+                    if filename.lower().endswith(('.jpg', '.jpeg')):
+                        self.image.fullpath = os.path.join(root, filename)
+                        if self.image.hasIt(str(self.searchTxt.text())):
+                            self.searchList.addItem(self.image.fullpath)
+
+
 
     @QtCore.pyqtSlot()
     def on_actionExit_triggered(self):

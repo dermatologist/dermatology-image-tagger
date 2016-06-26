@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>643</width>
-    <height>489</height>
+    <width>664</width>
+    <height>521</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,15 +19,18 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>641</width>
-      <height>441</height>
+      <width>651</width>
+      <height>451</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="FileWidget">
         <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -55,7 +58,7 @@
            <x>0</x>
            <y>220</y>
            <width>641</width>
-           <height>245</height>
+           <height>271</height>
           </rect>
          </property>
          <layout class="QFormLayout" name="formLayout_2">
@@ -122,7 +125,7 @@
           <item row="7" column="1">
            <widget class="QLabel" name="label_7">
             <property name="text">
-             <string>By Dermatologists Sans Borders http://dermatologist.co.in</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -158,17 +161,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTableView" name="searchTable">
-            <attribute name="horizontalHeaderCascadingSectionResizes">
-             <bool>true</bool>
-            </attribute>
-            <attribute name="verticalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="verticalHeaderHighlightSections">
-             <bool>false</bool>
-            </attribute>
-           </widget>
+           <widget class="QListWidget" name="searchList"/>
           </item>
          </layout>
         </widget>
@@ -186,22 +179,13 @@
            <widget class="QGraphicsView" name="pictureSearchView"/>
           </item>
           <item>
-           <widget class="QTableWidget" name="searchTable2"/>
+           <widget class="QLabel" name="searchLbl">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
           </item>
          </layout>
-        </widget>
-        <widget class="QProgressBar" name="searchProgressBar">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>410</y>
-           <width>118</width>
-           <height>23</height>
-          </rect>
-         </property>
-         <property name="value">
-          <number>24</number>
-         </property>
         </widget>
        </widget>
        <widget class="QWidget" name="SettingsWidget">
@@ -216,6 +200,9 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
+           <widget class="QListWidget" name="folderList"/>
+          </item>
+          <item>
            <widget class="QPushButton" name="chooseFolderButton">
             <property name="text">
              <string>Choose Folder to Add to Search Path</string>
@@ -223,10 +210,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit"/>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listWidget"/>
+           <widget class="QPushButton" name="folderRemoveButton">
+            <property name="text">
+             <string>Remove</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="loadSettingButton">
@@ -342,7 +330,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>643</width>
+     <width>664</width>
      <height>25</height>
     </rect>
    </property>
