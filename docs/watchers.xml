@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TaskOptions>
+    <TaskOptions>
+        <option name="arguments" value="$FilePath$ -o $Sourcepath$/$FileNameWithoutAllExtensions$_ui.py"/>
+        <option name="checkSyntaxErrors" value="true"/>
+        <option name="description" value="Convert UI Files to PY"/>
+        <option name="exitCodeBehavior" value="ERROR"/>
+        <option name="fileExtension" value="ui"/>
+        <option name="immediateSync" value="true"/>
+        <option name="name" value="Qt UI to PY"/>
+        <option name="output" value=""/>
+        <option name="outputFilters">
+            <array/>
+        </option>
+        <option name="outputFromStdout" value="false"/>
+        <option name="program" value="/home/beapen/anaconda3/envs/qt/bin/pyuic4"/>
+        <option name="scopeName" value="UI"/>
+        <option name="trackOnlyRoot" value="false"/>
+        <option name="workingDir" value=""/>
+        <envs/>
+    </TaskOptions>
+</TaskOptions>
+
