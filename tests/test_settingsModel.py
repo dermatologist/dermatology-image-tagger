@@ -8,4 +8,4 @@ class TestSettingsModel(TestCase):
         self.settingsModel = model.SettingsModel()
 
     def test_loadShouldNotThrowError(self):
-        self.settingsModel.load()
+        self.assertIsNone(self.settingsModel.load())

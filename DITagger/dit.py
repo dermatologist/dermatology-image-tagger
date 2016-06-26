@@ -19,6 +19,7 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def on_actionOpen_triggered(self):
+        self.stackedWidget.setCurrentWidget(self.FileWidget)
         _fileDialogue = QtGui.QFileDialog()
         _fileDialogue.setFilter("Image Files (*.jpg)")
         _openFile = _fileDialogue.getOpenFileName()
@@ -42,6 +43,7 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def on_actionSave_triggered(self):
+        self.stackedWidget.setCurrentWidget(self.FileWidget)
         _pixmap = QtGui.QPixmap(QtCore.QString(self.image.fullpath))
         self.pictureViewLbl.setPixmap(_pixmap)
         self.image.ditid = str(self.idTxt.text())
@@ -51,6 +53,14 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
         self.image.ditdate = str(self.dateTxt.text())
         self.image.ditcomment = str(self.commentTxt.text())
         self.image.ditsave()
+
+    @QtCore.pyqtSlot()
+    def on_actionDefault_triggered(self):
+        self.stackedWidget.setCurrentWidget(self.SettingsWidget)
+
+    @QtCore.pyqtSlot()
+    def on_chooseFolderButton_clicked(self):
+        print "pressed"
 
     @QtCore.pyqtSlot()
     def on_actionExit_triggered(self):
