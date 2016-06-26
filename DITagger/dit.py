@@ -4,10 +4,6 @@ from PyQt4 import QtCore, QtGui
 
 from DITagger import model, windows_ui  # This file holds our MainWindow and all design related things
 
-
-# it also keeps events etc that we defined in Qt Designer
-
-
 class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
     def __init__(self):
         super(self.__class__, self).__init__()
@@ -29,11 +25,32 @@ class DitApp(QtGui.QMainWindow, windows_ui.Ui_MainWindow):
         _pixmap = QtGui.QPixmap(_openFile)
         self.image.fullpath = str(_openFile)  # Covert QString to String
         self.pictureViewLbl.setPixmap(_pixmap)
+        # Clear Values
+        self.idTxt.clear()
+        self.lesionTxt.clear()
+        self.diagnosisTxt.clear()
+        self.locationTxt.clear()
+        self.dateTxt.clear()
+        self.commentTxt.clear()
+
         self.idTxt.setText(self.image.ditid)
         self.lesionTxt.setText(self.image.lesion)
         self.diagnosisTxt.setText(self.image.diagnosis)
         self.locationTxt.setText(self.image.location)
+        self.dateTxt.setText(self.image.ditdate)
         self.commentTxt.setText(self.image.ditcomment)
+
+    @QtCore.pyqtSlot()
+    def on_actionSave_triggered(self):
+        _pixmap = QtGui.QPixmap(QtCore.QString(self.image.fullpath))
+        self.pictureViewLbl.setPixmap(_pixmap)
+        self.image.ditid = str(self.idTxt.text())
+        self.image.lesion = str(self.lesionTxt.text())
+        self.image.diagnosis = str(self.diagnosisTxt.text())
+        self.image.location = str(self.locationTxt.text())
+        self.image.ditdate = str(self.dateTxt.text())
+        self.image.ditcomment = str(self.commentTxt.text())
+        self.image.ditsave()
 
     @QtCore.pyqtSlot()
     def on_actionExit_triggered(self):
